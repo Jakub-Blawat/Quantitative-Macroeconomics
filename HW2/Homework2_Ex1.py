@@ -10,7 +10,7 @@ import numpy.polynomial.polynomial as poly
 from numpy import inf
 import numpy.polynomial.chebyshev as cheby
 
-#mpl.pyplot.style.use("ggplot")
+mpl.pyplot.style.use("ggplot")
 
 # Exercise 1.1
 # Define the variable and the function that we are going to approximate
@@ -94,15 +94,15 @@ x1 = ny.linspace(x_grid[0],x_grid[1],11)
 y = f(x1)
 xs = ny.linspace(x_grid[0],x_grid[1],101)
 
-#Order3
+#Order 3:
 runge3_coef = poly.polyfit(x1,y,3)
 runge3_f = poly.polyval(xs,runge3_coef)
 
-#Order 5
+#Order 5:
 runge5_coef = poly.polyfit(x1,y,5)
 runge5_f = poly.polyval(xs,runge5_coef) 
 
-#Order 10
+#Order 10:
 runge10_coef = poly.polyfit(x1,y,10)
 runge10_f = poly.polyval(xs,runge10_coef)
 
@@ -114,15 +114,15 @@ def g(x):
 yg = g(x1)
 yg[yg == inf] = 9999
 
-#Order3
+#Order 3
 exp3_coef = poly.polyfit(x1,yg,3)
 exp3_g = poly.polyval(xs,exp3_coef)
 
-#Order5
+#Order 5
 exp5_coef = poly.polyfit(x1,yg,5)
 exp5_g = poly.polyval(xs,exp5_coef)
 
-#Order10
+#Order 10
 exp10_coef = poly.polyfit(x1,yg,10)
 exp10_g = poly.polyval(xs,exp10_coef)
 
@@ -131,12 +131,15 @@ def h(x):
 	return (x+abs(x))*0.5
 yh = h(x1)
 
+#Order 3
 ramp3_coef = poly.polyfit(x1,yh,3)
 ramp3_h = poly.polyval(xs,ramp3_coef)
 
+#Order 5
 ramp5_coef = poly.polyfit(x1,yh,5)
 ramp5_h = poly.polyval(xs,ramp5_coef)
 
+#Order 10
 ramp10_coef = poly.polyfit(x1,yh,10)
 ramp10_h = poly.polyval(xs,ramp10_coef)
 
@@ -196,6 +199,7 @@ mpl.pyplot.subplots_adjust(top=0.92, bottom=0.08, left=0.10, right=0.95, hspace=
 mpl.pyplot.show()
 
 # Exercise 1.3.2
+
 def f(x):
 	return 1.0 / (1.0 + 25.0 * x**2)
 x_grid=[-1,1]
@@ -209,22 +213,26 @@ fit3 = poly.polyval(xs,cs)
 x1 = ny.cos((2 * ny.arange(1, N + 1) - 1) / (2 * N) * ny.pi)
 x1 = sorted(x1)
 x1 = ny.asarray(x1)
-# Runge's function in [-1,1]
+
+# ---------------Runge's function----------------------------------------------
 def f(x):
 	return 1.0 / (1.0 + 25.0 * ny.power(x, 2))
 y = f(x1)
-
-cs = poly.polyfit(x1, y,3)
-ffit3 = poly.polyval(xs,cs)
 xs = ny.linspace(x_grid[0], x_grid[1], 101)
 
-# Monomials of order 5and 10:
-coef = poly.polyfit(x1, y, 5)
-fit = poly.polyval(xs, coef)
-coef10 = poly.polyfit(x1, y, 10)
-fit10 = poly.polyval(xs, coef10)
+#Order 3:
+runge3_coef = poly.polyfit(x1, y, 3)
+runge3_f = poly.polyval(xs,runge3_coef)
 
-# Exponential Function
+#Order 5:
+runge5_coef = poly.polyfit(x1, y, 5)
+runge5_f = poly.polyval(xs,runge5_coef)
+
+#Order10:
+runge10_coef = poly.polyfit(x1, y, 10)
+runge10_f = poly.polyval(xs,runge10_coef)
+
+#--------------------------Exponential Function--------------------------------
 def g(x):
 	with ny.errstate(divide='ignore', invalid='ignore'):
 		return ny.exp(1 / x)
@@ -232,24 +240,32 @@ def g(x):
 yg = g(x1)
 yg[yg == inf] = 9999
 
-cs_g = poly.polyfit(x1, yg,3)
-exp3_g = poly.polyval(xs,cs_g)
-coef_g = poly.polyfit(x1, yg, 5)
-exp5_g = poly.polyval(xs, coef_g) 
+#Order 3:
+exp3_coef = poly.polyfit(x1, yg, 3)
+exp3_g = poly.polyval(xs,exp3_coef)
+
+#Order 5:
+exp5_coef = poly.polyfit(x1, yg, 5)
+exp5_g = poly.polyval(xs, exp5_coef) 
+
+#Order 10:
 exp10_coef = poly.polyfit(x1, yg, 10)
 exp10_g = poly.polyval(xs, exp10_coef)
 
-
+#----------------------RampFunction--------------------------------------------
 def h(x):
-	return .5 * (x + abs(x))
+	return (x + abs(x))*0.5
 yh = h(x1)
 
-csh = poly.polyfit(x1, yh,3)
-ramp3_h = poly.polyval(xs,csh)
+#Order 3:
+ramp3_coef = poly.polyfit(x1, yh,3)
+ramp3_h = poly.polyval(xs,ramp3_coef)
 
-# Monomials of order 5 and 10:
-ramp_coef = poly.polyfit(x1, yh, 5)
-ramp5_h = poly.polyval(xs, ramp_coef)
+# Order 5:
+ramp5_coef = poly.polyfit(x1, yh, 5)
+ramp5_h = poly.polyval(xs, ramp5_coef)
+
+#Order 10:
 ramp10_coef = poly.polyfit(x1, yh, 10)
 ramp10_h = poly.polyval(xs, ramp10_coef)
 
@@ -323,13 +339,15 @@ def f(x):
 	return 1.0 / (1.0 + 25.0 * ny.power(x,2))
 y = f(x1)
 
-# Chebyshev polynomials of order 3, 5, 10:
+# Chebyshev polynomials of order 3:
 runge3_coef = cheby.chebfit(x1,y,3) 
 runge3_f = cheby.chebval(xs,runge3_coef)
 
+#Order 5:
 runge5_coef = cheby.chebfit(x1,y,5) 
 runge5_f  = cheby.chebval(xs,runge5_coef)
 
+#Order 10:
 runge10_coef = cheby.chebfit(x1,y,10) 
 runge10_f  = cheby.chebval(xs,runge10_coef)
 
@@ -364,7 +382,7 @@ ramp5_h  = cheby.chebval(xs,ramp5_coef)
 ramp10_coef = cheby.chebfit(x1,yh,10) 
 ramp10_h  = cheby.chebval(xs,ramp10_coef)
 
-#----------------------Plot----------------------------------------------------
+#----------------------Plots---------------------------------------------------
 fig = mpl.pyplot.figure(figsize=(15,10))
 fig.suptitle('Czebyszow nodes and Czebyszow polynomials')
 
@@ -419,6 +437,3 @@ mpl.pyplot.title('Ramp Function Approximation Errors')
 mpl.pyplot.xlim(x_grid)
 mpl.pyplot.subplots_adjust(top=0.9, bottom=0.1, left=0.1, right=0.90, hspace=0.25,wspace=0.35)
 mpl.pyplot.show()
-
-# Exercise 2
-#TBA
