@@ -35,25 +35,54 @@ phi   = 0.2
 cap_l_A = 1
 cap_h_A = 1
 cap_l_B = 1
-cap_h_A = 1
+cap_h_B = 1
 
 # Solving our set of equations:
  
+#Country A
+
 def f(x):
+    # From firms problem:
     f1 = (1-theta)*(zeta)*pow(cap_up,-theta)*pow(x[2]*eta_l_A+x[3]*eta_h_A, theta)-x[0]
     f2 = (theta)*(zeta)*pow(cap_up,1-theta)*pow(x[2]*eta_l_A+x[3]*eta_h_A, theta-1)-x[1]
+    # From HHs problem:
     f3 = (lambda_A)*(1-phi)*pow(x[1]*(eta_h_A),1-phi)*pow(x[5],-sigma)-kappa*pow(x[3],(eta_h_A) + (1/nu))
     f4 = (lambda_A)*(1-phi)*pow(x[1]*(eta_l_A),1-phi)*pow(x[4],-sigma)-kappa*pow(x[2],(eta_l_A) + (1/nu))
+    # Budget constraints
     f5 =  (lambda_A)*pow(x[1]*x[3]*eta_h_A,1-phi)+x[0]*pow(cap_h_A,eta_h_A)-x[5]
     f6 =  (lambda_A)*pow(x[1]*x[2]*eta_l_A,1-phi)+x[0]*pow(cap_l_A,eta_l_A)-x[4]
     return[f1,f2,f3,f4,f5,f6]
 
-equilibrium_a = fsolve(f, [1,1,1,1,1,1])
+equil_A = fsolve(f, [1,1,1,1,1,1])
 
-#Equilibrium
-print('A: Rate of return:', round(equilibrium_a[0],2))
-print('A: Wages:', round(equilibrium_a[1],2))  
-print('A: Labor supply (low type)', round(equilibrium_a[2],2))
-print('A: Labor supply (high type):', round(equilibrium_a[3],2))
-print('A: Consumption (low types):', round(equilibrium_a[4],2))
-print('A: Consumption (high type):', round(equilibrium_a[5],2))
+#Equilibrium for country A
+print('A-Rate of return:', round(equil_A[0],2))
+print('A-Wages:', round(equil_A[1],2))  
+print('A-Labor supply (low type)', round(equil_A[2],2))
+print('A-Labor supply (high type):', round(equil_A[3],2))
+print('A-Consumption (low types):', round(equil_A[4],2))
+print('A-Consumption (high type):', round(equil_A[5],2))
+
+# Country B
+
+def g(x):
+    # From firms problem:
+    g1 = (1-theta)*(zeta)*pow(cap_up,-theta)*pow(x[2]*eta_l_B+x[3]*eta_h_B, theta)-x[0]
+    g2 = (theta)*(zeta)*pow(cap_up,1-theta)*pow(x[2]*eta_l_B+x[3]*eta_h_B, theta-1)-x[1]
+    # From HHs problem:
+    g3 = (lambda_B)*(1-phi)*pow(x[1]*(eta_h_B),1-phi)*pow(x[5],-sigma)-kappa*pow(x[3],(eta_h_B) + (1/nu))
+    g4 = (lambda_B)*(1-phi)*pow(x[1]*(eta_l_B),1-phi)*pow(x[4],-sigma)-kappa*pow(x[2],(eta_l_B) + (1/nu))
+    # Budget constraints
+    g5 =  (lambda_A)*pow(x[1]*x[3]*eta_h_B,1-phi)+x[0]*pow(cap_h_B,eta_h_B)-x[5]
+    g6 =  (lambda_A)*pow(x[1]*x[2]*eta_l_B,1-phi)+x[0]*pow(cap_l_B,eta_l_B)-x[4]
+    return[g1,g2,g3,g4,g5,g6]
+
+equil_B = fsolve(g, [1,1,1,1,1,1])
+
+#Equilibrium for country B
+print('B-Rate of return:', round(equil_B[0],2))
+print('B-Wages:', round(equil_B[1],2))  
+print('B-Labor supply (low type)', round(equil_B[2],2))
+print('B-Labor supply (high type):', round(equil_B[3],2))
+print('B-Consumption (low types):', round(equil_B[4],2))
+print('B-Consumption (high type):', round(equil_B[5],2))
