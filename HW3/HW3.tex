@@ -1,0 +1,299 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{optidef}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{mwe}
+
+\title{Quantitative Macroeconomics Homework 3}
+\author{Szymon Wieczorek\thanks{In collaboration with Zuzanna Brzóska-Klimek, Sebastian A. Roy and Jakub Blawat}}
+\date{October 2019}
+
+\begin{document}
+\maketitle
+\titlepage
+
+\section*{Exercise 1}
+
+Infinite number of household maximize their utility function:
+\begin{maxi}
+    {c_t}{E_0{\sum_{t=0}^{\infty}}{\beta}^{t}\ln c_{t}}
+    {}{}
+    \addConstraint{c_{t} + i_{t} = y_{t}}
+    \addConstraint{y_{t} = k_{t}^{1-\theta} (zh_{t})^\theta}
+    \addConstraint{i_{t} = k_{t+1} - (1-\delta) k_{t}}
+\end{maxi}
+We also know that ${\theta} = .067$ and $h_{t} = 0.31$ for all $t$. Additionally, in point a) we have to assume that annual capital-to-output ratio is 4 and investment-to-output ratio is .25. Our role is to calculate transition paths under productivity factor shocks $z$.
+
+\subsection*{a)}
+
+Steady state is computed by the VFI method. In the standard neoclassical growth model (such as the one discussed in this exercise) the only state variable is capital $k_{t}$. Setting capital grid $\{0, 0.05, 0.10, ..., 50\}$ and starting from $k_{init}=25$, after 81 iterations we obtain following results, shown in Table \ref{tab1}:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c|c}
+         $k_{ss}$ & $y_{ss}$ & $i_{ss}$ & $c_{ss}$  \\
+         \hline
+         4 & 1 & 0.25 & 0.75 
+    \end{tabular}
+    \caption{Steady states in the neoclassical growth model with $z=1.63$}
+    \label{tab1}
+\end{table}
+
+Indeed, we can see that the assumed boundaries for capital are slack, which means that our computations are valid. Moreover, time path of capital is presented in Figure \ref{fig1}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{1.png}
+    \caption{Neoclassical growth model capital path}
+    \label{fig1}
+\end{figure}
+
+\subsection*{b)}
+
+\begin{table}
+    \centering
+    \begin{tabular}{c|c|c|c}
+         $k_{ss}$ & $y_{ss}$ & $i_{ss}$ & $c_{ss}$  \\
+         \hline
+         8 & 2 & 0.5 & 1.5 
+    \end{tabular}
+    \caption{Steady states in the neoclassical growth model with $z=3.26$}
+    \label{tab2}
+\end{table}
+
+As presented in Table \ref{tab2}, choosing different productivity factor $z$ changes nominal values of the steady state, but in equal proportions for all variables (they are simply upscaled). Figure \ref{fig2} shows the updated capital path.
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.6\textwidth]{2.png}
+    \caption{Neoclassical growth model capital path}
+    \label{fig2}
+\end{figure}
+
+\subsection*{c)}
+
+Setting $k_{init}=4$, that is the low-productivity steady state value of capital in the high-productivity environment produces convergence paths shown in Figure \ref{tab2}. Since labour supply is fixed, path of labour is omitted (it is flat).
+
+\begin{figure*}
+        \centering
+        \begin{subfigure}[b]{0.475\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{3.png}
+            \caption[]%
+            {{\small Capital}}    
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.475\textwidth}  
+            \centering 
+            \includegraphics[width=\textwidth]{4.png}
+            \caption[]%
+            {{\small Consumption}}    
+        \end{subfigure}
+        \vskip\baselineskip
+        \begin{subfigure}[b]{0.475\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{5.png}
+            \caption[]%
+            {{\small Output}}    
+        \end{subfigure}
+        \quad
+        \begin{subfigure}[b]{0.475\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{6.png}
+            \caption[]%
+            {{\small Savings}}    
+        \end{subfigure}
+        \caption[]
+        {\small Transition paths from $z=1.63$ to $z=3.26$} 
+        \label{fig3}
+\end{figure*}
+    
+\subsection*{d)}
+
+Transition paths presented in Figure \ref{fig4} are calculated under assumption that the initial capital level is $k_{init}=25$. For the first 10 periods agents are allowed to optimize under productivity factor $z=3.26$, but from 11 period on they start using decision rule $g(k_{t})$\footnote{Vector $g(k_{t})$ stores optimal choice of $k_{t+1}$ given $k_{t}$. More technically, it consists of indices of the $\arg \max$ of the $i^{th}$ verse of $\chi$ matrix.} calculated under $z=1.63$.
+
+Interestingly, we can observe that control variables (called also \textit{jumpers}) indeed do not need to be continuous and as a result of the shock they abruptly change their values. In the short run negative productivity shock increases consumption and decreases savings. It affects also slope of the output convergence curve.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{\textwidth}
+  \centering
+  \includegraphics[width=0.6\linewidth]{7.png}
+    \caption{Consumption}
+\end{subfigure}
+
+\begin{subfigure}{\textwidth}
+  \centering
+  \includegraphics[width=0.6\linewidth]{8.png}
+  \caption{Output}
+\end{subfigure}
+
+\begin{subfigure}{\textwidth}
+  \centering
+  \includegraphics[width=0.6\linewidth]{9.png}
+  \caption{Savings}
+\end{subfigure}
+
+\caption{Transition paths under negative productivity shock at $t=11$}
+\label{fig4}
+\end{figure}
+
+\section*{Exercise 1 - bonus tasks}
+
+\subsection*{e)}
+
+Figures \ref{fig5}, \ref{fig6}, and \ref{fig7} show optimal paths for capital, consumption, output, and savings in an economy with, respectively, consumption tax, capital tax, and both.
+
+Tax rate in both cases has ben set to 20\%. Initial point for capital is 10.
+
+\begin{figure*}[p][H]
+        \centering
+        \begin{subfigure}[b]{0.475\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{10.png}
+            \caption[]%
+            {{\small Capital}}    
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.475\textwidth}  
+            \centering 
+            \includegraphics[width=\textwidth]{11.png}
+            \caption[]%
+            {{\small Consumption}}    
+        \end{subfigure}
+        \vskip\baselineskip
+        \begin{subfigure}[b]{0.475\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{12.png}
+            \caption[]%
+            {{\small Output}}    
+        \end{subfigure}
+        \quad
+        \begin{subfigure}[b]{0.475\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{13.png}
+            \caption[]%
+            {{\small Savings}}    
+        \end{subfigure}
+        \caption[]
+        {\small Transition paths in economy with consumption tax $\tau_{c}=20\%$} 
+        \label{fig5}
+\end{figure*}
+
+\begin{figure*}[p][H]
+        \centering
+        \begin{subfigure}[b]{0.475\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{14.png}
+            \caption[]%
+            {{\small Capital}}    
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.475\textwidth}  
+            \centering 
+            \includegraphics[width=\textwidth]{15.png}
+            \caption[]%
+            {{\small Consumption}}    
+        \end{subfigure}
+        \vskip\baselineskip
+        \begin{subfigure}[b]{0.475\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{16.png}
+            \caption[]%
+            {{\small Output}}    
+        \end{subfigure}
+        \quad
+        \begin{subfigure}[b]{0.475\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{17.png}
+            \caption[]%
+            {{\small Savings}}    
+        \end{subfigure}
+        \caption[]
+        {\small Transition paths in economy with capital tax $\tau_{k}=20\%$} 
+        \label{fig6}
+\end{figure*}
+
+\begin{figure*}[p][H]
+        \centering
+        \begin{subfigure}[b]{0.475\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{18.png}
+            \caption[]%
+            {{\small Capital}}    
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.475\textwidth}  
+            \centering 
+            \includegraphics[width=\textwidth]{19.png}
+            \caption[]%
+            {{\small Consumption}}    
+        \end{subfigure}
+        \vskip\baselineskip
+        \begin{subfigure}[b]{0.475\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{20.png}
+            \caption[]%
+            {{\small Output}}    
+        \end{subfigure}
+        \quad
+        \begin{subfigure}[b]{0.475\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{21.png}
+            \caption[]%
+            {{\small Savings}}    
+        \end{subfigure}
+        \caption[]
+        {\small Transition paths in economy with both consumption and capital tax $\tau_{c}=\tau_{k}=20\%$} 
+        \label{fig7}
+\end{figure*}
+
+\section*{Exercise 2}
+\subsection*{a)}
+\textbf{Household's maximization problem:}
+\begin{maxi}
+	{c_l,k_l,h_l}{\frac{c_l^{1-\sigma}}{1-\sigma}-\kappa \frac{h_l^{1+1/v}}{1+1/v}}
+	{}{}
+	\addConstraint{c = \lambda(w_l(h_l)\eta_l)^{1-\phi_l}+r_l k_l^\eta}+r_{-l} (\tilde{k}_l-k_l)
+\end{maxi}
+In closed economy foreign investments are equal to zero: $\tilde{k}_l-k_l = 0$. \\
+FOCs:
+\begin{equation}
+    \frac{\partial{(...)}}{\partial{c}} : \frac{1}{c_l^{\sigma}} = \lambda_L \\
+\end{equation}
+\begin{equation}
+    \frac{\partial{(...)}}{\partial{h}} : \kappa h_l^{1/v} = \lambda_L \lambda (w \eta )^{1-\phi_l}(1- \phi_l)h^{- \phi_l}
+\end{equation}
+Finally we receive Euler equation:
+\begin{equation}
+    \kappa h^{1/v} = \frac{\lambda(1-\phi)(w\eta)^{1-\phi}}{h^{\eta}}
+\end{equation}
+We assume that in our economy we have two types of people : low and high productive. So we end up with 2 Euler equations,each for one type. \\
+\textbf{Firms problem:}
+\begin{maxi}
+	{K_l^d,H_l^d}{Z(K_l^d)^{1-\theta}(H_l^d)^{\theta} - w_l H_l^d - r_l K_l^d}
+	{}{}
+\end{maxi}
+FOCs:
+\begin{equation}
+r = (1-\theta)Z(K^d)^{-\theta}(H^d)^{\theta}    
+\end{equation}
+\begin{equation}
+w = \theta Z K^{1-\theta} H^{\theta - 1}    
+\end{equation}
+
+Together with market clearing conditions:
+\begin{itemize}
+    \item $K = k_h + k_l$
+    \item $H = \eta_h h_h +  \eta_lh_l$
+\end{itemize}
+\textbf{Solving: (in progres)}
+Solved using Python.
+
+
+
+\end{document}
